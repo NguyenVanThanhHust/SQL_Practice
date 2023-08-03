@@ -11,5 +11,7 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 add_executable(${PROJECT_NAME}
     constant.h
+    CommandProcessor.h
+    CommandProcessor.cpp
     main.cpp
     )
