@@ -13,5 +13,7 @@ add_executable(${PROJECT_NAME}
     constant.h
     CommandProcessor.h
     CommandProcessor.cpp
+    Pager.h
+    Pager.cpp
     main.cpp
     )
