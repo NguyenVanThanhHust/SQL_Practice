@@ -51,8 +51,6 @@ PrepareResult CommandProcessor::prepare_statement(std::string &input_string, Sta
         statement.row_to_insert.id = std::stoi(cmd[1]);
         std::strcpy(statement.row_to_insert.username, cmd[2].c_str());
         std::strcpy(statement.row_to_insert.email, cmd[3].c_str());
-        // statement.row_to_insert.username = cmd[2];
-        // statement.row_to_insert.email = cmd[3];
         
         return PREPARE_SUCCESS;
     }
@@ -63,17 +61,31 @@ PrepareResult CommandProcessor::prepare_statement(std::string &input_string, Sta
     }
     return PREPARE_UNRECOGNIZED_STATEMENT;
 };
+ExecuteResult insert_statement(Statement &statement, Table &table)
+{
+    if (table.num_rows >= TABLE_MAX_ROWS)
+    {
+        return EXECUTE_TABLE_FULL;
+    }
+    Row row_to_insert = statement.row_to_insert;
+    serialize_row(row_to_insert, row_slot(table, tal))
+    
+};
 
-void CommandProcessor::execute_statement(Statement &statement)
+ExecuteResult select_statement(Statement &statement, Table &table)
+{
+
+};
+
+
+ExecuteResult CommandProcessor::execute_statement(Statement &statement, Table &table)
 {
     switch (statement.type)
     {
     case (STATEMENT_INSERT):
-        cout<<"Insert something"<<endl;
-        break;
+        return insert_statement(statement, table);
     case (STATEMENT_SELECT):
-        cout<<"Select something"<<endl;
-        break;
+        return select_statement(statement, table);
     }
 }
 void CommandProcessor::getCommand()

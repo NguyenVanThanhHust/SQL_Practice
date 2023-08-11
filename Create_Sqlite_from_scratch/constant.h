@@ -22,10 +22,16 @@ enum PrepareResult {
     PREPARE_UNRECOGNIZED_STATEMENT
 };
 
-enum CommandResult{
+enum CommandResult {
     COMMAND_SUCCESS,
     COMMAND_FAILED,
     UNRECOGNIZED_COMMAND,
+};
+
+enum ExecuteResult {
+    EXECUTE_TABLE_FULL,
+    EXECUTE_SUCCESS,
+    EXECUTE_FAIL
 };
 
 enum StatementType {
@@ -38,6 +44,7 @@ struct Statement {
     Row row_to_insert;
 };
 
+// Define compact representation of a row
 #define size_of_attribute(Struct, Attribute) sizeof(((Struct*)0)->Attribute)
 const uint32_t ID_SIZE = size_of_attribute(Row, id);
 const uint32_t USERNAME_SIZE = size_of_attribute(Row, username);
